@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST Data Intelligence | Filesystem & Storage AI Awareness</title>
+<style>
+  :root {
+    --surface: #ffffff;
+    --surface-alt: #f7f8fa;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a5a;
+    --text-muted: #8a8a9a;
+    --border: #e4e6eb;
+    --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+    --radius: 10px;
+
+    --store: #6B5B95;
+    --store-light: #f0edf5;
+    --format: #4A7FB5;
+    --format-light: #e8f0f8;
+    --transport: #3D2C6B;
+    --transport-light: #ece8f4;
+    --accelerate: #D4A843;
+    --accelerate-light: #fdf6e3;
+    --protect: #D4724A;
+    --protect-light: #fdeee8;
+    --optimize: #5BA4C9;
+    --optimize-light: #e8f4fa;
+
+    --vendor: #2563eb;
+    --opensource: #16a34a;
+    --industry: #9333ea;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface: #0f1117;
+      --surface-alt: #1a1b26;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border: #27272a;
+      --shadow: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-hover: 0 4px 16px rgba(0,0,0,0.4);
+
+      --store-light: #1e1a2e;
+      --format-light: #1a2230;
+      --transport-light: #1a1530;
+      --accelerate-light: #2a2518;
+      --protect-light: #2a1e18;
+      --optimize-light: #18252e;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background: var(--surface);
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2b55 50%, #3d2c6b 100%);
+    color: #fff;
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5l25 15v20L30 55 5 40V20z' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 span { color: #D4A843; }
+
+  .hero .subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 400;
+  }
+
+  .hero .meta-line {
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .hero .meta-line a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(255,255,255,0.3);
+  }
+
+  /* Tab navigation */
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    background: var(--surface-alt);
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex: 1;
+    min-width: 140px;
+    padding: 1rem 1.2rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .tab-btn .tab-icon {
+    font-size: 1.3rem;
+    display: block;
+  }
+
+  .tab-btn:hover {
+    background: var(--surface);
+    color: var(--text-secondary);
+  }
+
+  .tab-btn.active {
+    color: var(--text-primary);
+    background: var(--surface);
+  }
+
+  .tab-btn[data-tab="store-data"].active { border-bottom-color: var(--store); }
+  .tab-btn[data-tab="format-data"].active { border-bottom-color: var(--format); }
+  .tab-btn[data-tab="transport-data"].active { border-bottom-color: var(--transport); }
+  .tab-btn[data-tab="accelerate-data"].active { border-bottom-color: var(--accelerate); }
+  .tab-btn[data-tab="protect-data"].active { border-bottom-color: var(--protect); }
+  .tab-btn[data-tab="optimize-infra"].active { border-bottom-color: var(--optimize); }
+
+  .tab-btn .badge {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  /* Content area */
+  .content-area {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    min-height: 60vh;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+
+  .loading .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid var(--border);
+    border-top-color: var(--store);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Section styling for tab content */
+  .section-group { margin-bottom: 2.5rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-header .dot.vendor { background: var(--vendor); }
+  .section-header .dot.opensource { background: var(--opensource); }
+  .section-header .dot.industry { background: var(--industry); }
+
+  .section-header h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+  }
+
+  .entry-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 0.8rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .entry-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--text-muted);
+  }
+
+  .entry-card .entry-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .entry-card h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0.3rem 0;
+    color: var(--text-primary);
+  }
+
+  .entry-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .entry-card .tags {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .entry-card .tag {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    background: var(--surface-alt);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .entry-card .tag.sales { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+  .entry-card .tag.engineering { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+  .entry-card .tag.redhat { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+
+  .entry-card .read-more {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--vendor);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .entry-card .read-more:hover { text-decoration: underline; }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Tab intro banner */
+  .tab-intro {
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid;
+  }
+
+  .tab-intro h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .tab-intro p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .tab-intro.store { background: var(--store-light); border-color: var(--store); }
+  .tab-intro.format { background: var(--format-light); border-color: var(--format); }
+  .tab-intro.transport { background: var(--transport-light); border-color: var(--transport); }
+  .tab-intro.accelerate { background: var(--accelerate-light); border-color: var(--accelerate); }
+  .tab-intro.protect { background: var(--protect-light); border-color: var(--protect); }
+  .tab-intro.optimize { background: var(--optimize-light); border-color: var(--optimize); }
+
+  /* Last updated */
+  .last-updated {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: right;
+    padding: 0.5rem 0;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 1.5rem; }
+    .tab-btn { min-width: 110px; padding: 0.8rem 0.6rem; font-size: 0.72rem; }
+    .tab-btn .tab-icon { font-size: 1.1rem; }
+    .content-area { padding: 1.2rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1><span>FAST</span> Data Intelligence</h1>
+    <div class="subtitle">Filesystem & Storage AI Awareness for Partner Product & Engineering Teams</div>
+    <div class="meta-line">
+      Organized by <a href="https://www.snia.org/" target="_blank" rel="noopener">SNIA</a> taxonomy
+      &middot; Updated weekly &middot; Red Hat Storage & Filesystems
+    </div>
+  </div>
+</div>
+
+<nav class="tab-bar" role="tablist">
+  <button class="tab-btn active" data-tab="store-data" role="tab" aria-selected="true">
+    <span class="tab-icon">&#x1F4E6;</span> Store Data
+  </button>
+  <button class="tab-btn" data-tab="format-data" role="tab">
+    <span class="tab-icon">&#x1F4CB;</span> Format Data
+  </button>
+  <button class="tab-btn" data-tab="transport-data" role="tab">
+    <span class="tab-icon">&#x1F310;</span> Transport Data
+  </button>
+  <button class="tab-btn" data-tab="accelerate-data" role="tab">
+    <span class="tab-icon">&#x26A1;</span> Accelerate Data
+  </button>
+  <button class="tab-btn" data-tab="protect-data" role="tab">
+    <span class="tab-icon">&#x1F512;</span> Protect Data
+  </button>
+  <button class="tab-btn" data-tab="optimize-infra" role="tab">
+    <span class="tab-icon">&#x2699;</span> Optimize Infra
+  </button>
+</nav>
+
+<main class="content-area">
+  <div id="store-data" class="tab-content active">
+    <div class="loading"><div class="spinner"></div>Loading...</div>
+  </div>
+  <div id="format-data" class="tab-content">
+    <div class="loading"><div class="spinner"></div>Loading...</div>
+  </div>
+  <div id="transport-data" class="tab-content">
+    <div class="loading"><div class="spinner"></div>Loading...</div>
+  </div>
+  <div id="accelerate-data" class="tab-content">
+    <div class="loading"><div class="spinner"></div>Loading...</div>
+  </div>
+  <div id="protect-data" class="tab-content">
+    <div class="loading"><div class="spinner"></div>Loading...</div>
+  </div>
+  <div id="optimize-infra" class="tab-content">
+    <div class="loading"><div class="spinner"></div>Loading...</div>
+  </div>
+</main>
+
+<footer>
+  FAST Data Intelligence &middot; Red Hat Storage & Filesystems
+  &middot; SNIA Experts on Data Framework
+  <br>
+  <a href="https://www.redhat.com" target="_blank" rel="noopener">Red Hat</a>
+  &middot;
+  <a href="https://www.snia.org" target="_blank" rel="noopener">SNIA</a>
+</footer>
+
+<script>
+const TABS = [
+  'store-data', 'format-data', 'transport-data',
+  'accelerate-data', 'protect-data', 'optimize-infra'
+];
+
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+const loaded = {};
+
+function switchTab(tabId) {
+  tabButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tabId);
+    btn.setAttribute('aria-selected', btn.dataset.tab === tabId);
+  });
+  tabContents.forEach(tc => {
+    tc.classList.toggle('active', tc.id === tabId);
+  });
+  if (!loaded[tabId]) {
+    loadTab(tabId);
+  }
+  history.replaceState(null, '', '#' + tabId);
+}
+
+async function loadTab(tabId) {
+  try {
+    const resp = await fetch('tabs/' + tabId + '.html');
+    if (!resp.ok) throw new Error('Not found');
+    const html = await resp.text();
+    document.getElementById(tabId).innerHTML = html;
+    loaded[tabId] = true;
+  } catch (e) {
+    document.getElementById(tabId).innerHTML =
+      '<div class="empty-state">Content coming soon. Edit <code>tabs/' + tabId + '.html</code> to add entries.</div>';
+    loaded[tabId] = true;
+  }
+}
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+// Load initial tab (from hash or default)
+const initialTab = location.hash ? location.hash.slice(1) : 'store-data';
+if (TABS.includes(initialTab)) {
+  switchTab(initialTab);
+} else {
+  switchTab('store-data');
+}
+</script>
+
+</body>
+</html>

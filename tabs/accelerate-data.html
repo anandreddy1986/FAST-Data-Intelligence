@@ -1,0 +1,96 @@
+<!-- ACCELERATE DATA — Caching, tiering, GPU-direct storage, performance optimization -->
+<!-- Last updated: 2026-10-07 -->
+
+<div class="tab-intro accelerate">
+  <h2>Accelerate Data</h2>
+  <p>Performance acceleration — caching (dm-cache, bcache), storage tiering, I/O scheduling, read-ahead tuning, and GPU-direct storage. Techniques to eliminate storage bottlenecks in AI/ML training and inference pipelines.</p>
+</div>
+
+<div class="last-updated">Last updated: 7 Oct 2026</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- VENDOR UPDATES                              -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot vendor"></div>
+    <h3>Vendor Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">5 Oct 2026</div>
+    <h4>Intel Optane CXL — Persistent Memory as Storage Cache Tier</h4>
+    <p>Intel positions CXL-attached Optane as a transparent cache tier between DRAM and NVMe. RHEL's dm-writecache and Stratis can leverage this as an intermediate tier. Potential game-changer for AI checkpoint I/O latency.</p>
+    <div class="tags">
+      <span class="tag">Intel</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">30 Sep 2026</div>
+    <h4>Samsung CXL Memory Expander — 256GB CXL Modules for AI Servers</h4>
+    <p>Samsung ships 256GB CXL 2.0 memory expanders targeting AI server OEMs. Partners building AI-optimized infrastructure should note: RHEL 9.5+ supports CXL memory hot-plug via kernel DAX subsystem.</p>
+    <div class="tags">
+      <span class="tag">Samsung</span>
+      <span class="tag sales">Sales</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- OPEN SOURCE UPDATES                         -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot opensource"></div>
+    <h3>Open Source Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">3 Oct 2026</div>
+    <h4>io_uring — Zero-Copy Networking for Storage I/O</h4>
+    <p>Linux 6.12 extends io_uring with zero-copy send/receive for networked storage. Enables user-space NVMe-oF targets with kernel-bypass performance. RHEL 10 will be the first enterprise distro to ship this capability.</p>
+    <div class="tags">
+      <span class="tag">Linux Kernel</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">22 Sep 2026</div>
+    <h4>Stratis 3.7 — Automated Tiering Between NVMe and HDD Pools</h4>
+    <p>Stratis 3.7 introduces policy-driven data tiering between fast (NVMe) and capacity (HDD) pools. Hot data auto-promotes to NVMe tier. Reduces AI data lake costs while maintaining training throughput for active datasets.</p>
+    <div class="tags">
+      <span class="tag">Stratis</span>
+      <span class="tag redhat">Red Hat</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- INDUSTRY UPDATES                            -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot industry"></div>
+    <h3>Industry Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">27 Sep 2026</div>
+    <h4>Gartner: Storage I/O is the #1 AI Training Bottleneck</h4>
+    <p>Gartner's latest infrastructure report identifies storage I/O as the primary bottleneck in 68% of enterprise AI training deployments. Key insight for partner sales: solving storage performance = selling AI enablement, not just disk.</p>
+    <div class="tags">
+      <span class="tag">Gartner</span>
+      <span class="tag sales">Sales</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->
+</div>

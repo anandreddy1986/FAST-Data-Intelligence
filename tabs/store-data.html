@@ -1,0 +1,108 @@
+<!-- STORE DATA — Filesystems, block/object storage, Ceph, GlusterFS, LVM, XFS, ext4 -->
+<!-- Last updated: 2026-10-07 -->
+
+<div class="tab-intro store">
+  <h2>Store Data</h2>
+  <p>Persistent storage technologies — filesystems (XFS, ext4, Btrfs), block & object storage (Ceph, ODF), volume management (LVM, Stratis), and how storage choices impact AI/ML workloads.</p>
+</div>
+
+<div class="last-updated">Last updated: 7 Oct 2026</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- VENDOR UPDATES                              -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot vendor"></div>
+    <h3>Vendor Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">7 Oct 2026</div>
+    <h4>Red Hat ODF 4.16 — Unified Storage for AI Pipelines</h4>
+    <p>OpenShift Data Foundation 4.16 introduces multi-cloud gateway enhancements and NVMe-oF support for Ceph, reducing storage latency for GPU-attached AI training clusters by up to 40%. Key for partner conversations around containerized ML workloads.</p>
+    <div class="tags">
+      <span class="tag redhat">Red Hat</span>
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">1 Oct 2026</div>
+    <h4>NetApp ONTAP AI — Persistent Volume Claims at Scale</h4>
+    <p>NetApp's latest Trident CSI driver update improves PVC provisioning speed for Kubernetes AI workloads. Relevant as a competitive reference when positioning ODF/Ceph against ONTAP in partner deals.</p>
+    <div class="tags">
+      <span class="tag">NetApp</span>
+      <span class="tag sales">Sales</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- OPEN SOURCE UPDATES                         -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot opensource"></div>
+    <h3>Open Source Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">5 Oct 2026</div>
+    <h4>Ceph Squid (v19) — BlueStore Deferred Writes Overhaul</h4>
+    <p>The Squid release refactors BlueStore's deferred write path, delivering 25% improved random write IOPS. XFS remains the recommended underlying filesystem for OSD deployments. Upstream patches flowing into ODF 4.17.</p>
+    <div class="tags">
+      <span class="tag">Ceph</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">28 Sep 2026</div>
+    <h4>XFS Online Repair — Merged in Linux 6.12</h4>
+    <p>The long-awaited online repair feature for XFS has been merged upstream. Allows live filesystem repair without unmounting — critical for 24/7 AI training infrastructure where downtime for fsck is unacceptable.</p>
+    <div class="tags">
+      <span class="tag">XFS</span>
+      <span class="tag">Linux Kernel</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- INDUSTRY UPDATES                            -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot industry"></div>
+    <h3>Industry Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">3 Oct 2026</div>
+    <h4>IDC: AI Storage Market to Reach $30B by 2028</h4>
+    <p>IDC's latest forecast projects the AI-optimized storage market at $30B by 2028, with software-defined storage (SDS) growing fastest. Key talking point: Red Hat's SDS portfolio (ODF + Ceph) is positioned in the fastest-growing segment.</p>
+    <div class="tags">
+      <span class="tag">IDC</span>
+      <span class="tag sales">Sales</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">25 Sep 2026</div>
+    <h4>SNIA Publishes AI Data Pipeline Reference Architecture</h4>
+    <p>SNIA's new reference architecture maps storage tiers to AI pipeline stages (ingest, preprocess, train, serve). Useful framework for partner solution architects designing storage for AI workloads.</p>
+    <div class="tags">
+      <span class="tag">SNIA</span>
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->
+</div>

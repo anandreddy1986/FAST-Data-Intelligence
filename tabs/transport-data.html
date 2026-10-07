@@ -1,0 +1,88 @@
+<!-- TRANSPORT DATA — NVMe-oF, RDMA, network storage, data movement, CXL -->
+<!-- Last updated: 2026-10-07 -->
+
+<div class="tab-intro transport">
+  <h2>Transport Data</h2>
+  <p>Data transport technologies — NVMe-oF, NVMe/TCP, RDMA (RoCE, InfiniBand), CXL, and network storage fabrics. How transport layer choices determine AI training throughput and data pipeline latency.</p>
+</div>
+
+<div class="last-updated">Last updated: 7 Oct 2026</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- VENDOR UPDATES                              -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot vendor"></div>
+    <h3>Vendor Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">4 Oct 2026</div>
+    <h4>Broadcom — 400G Ethernet Adapters with Native NVMe-oF Offload</h4>
+    <p>New 400GbE NICs with hardware NVMe-oF offload engines. Relevant for Red Hat partners designing disaggregated storage fabrics — pairs with RHEL's upstream NVMe-oF initiator/target support.</p>
+    <div class="tags">
+      <span class="tag">Broadcom</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">29 Sep 2026</div>
+    <h4>NVIDIA GPUDirect Storage 2.0 — Bypass CPU for AI I/O</h4>
+    <p>GPUDirect Storage 2.0 enables direct DMA between NVMe storage and GPU memory, bypassing CPU entirely. RHEL 9.5 kernel includes required DMA-BUF support. Critical for partners positioning GPU-accelerated AI infrastructure.</p>
+    <div class="tags">
+      <span class="tag">NVIDIA</span>
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- OPEN SOURCE UPDATES                         -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot opensource"></div>
+    <h3>Open Source Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">1 Oct 2026</div>
+    <h4>Linux 6.12 — NVMe/TCP Multipath Improvements</h4>
+    <p>Kernel 6.12 brings native NVMe/TCP multipath with automatic path failover and round-robin load balancing. Eliminates need for dm-multipath in NVMe-oF deployments. Flowing into RHEL 10 kernel.</p>
+    <div class="tags">
+      <span class="tag">Linux Kernel</span>
+      <span class="tag">NVMe</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- INDUSTRY UPDATES                            -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot industry"></div>
+    <h3>Industry Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">26 Sep 2026</div>
+    <h4>CXL 3.1 Specification Ratified — Memory Pooling for AI</h4>
+    <p>CXL Consortium ratifies 3.1 spec with fabric-level memory pooling and hardware-enforced isolation. Enables shared memory pools across compute nodes for AI training. Early Linux/RHEL CXL support already upstream via cxl-cli and kernel CXL subsystem.</p>
+    <div class="tags">
+      <span class="tag">CXL</span>
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->
+</div>

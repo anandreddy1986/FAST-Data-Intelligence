@@ -1,0 +1,97 @@
+<!-- PROTECT DATA — Backup, DR, snapshots, encryption, compliance, data integrity -->
+<!-- Last updated: 2026-10-07 -->
+
+<div class="tab-intro protect">
+  <h2>Protect Data</h2>
+  <p>Data protection and security — encryption at rest/in transit, snapshots, backup & disaster recovery, filesystem integrity, compliance (FIPS, Common Criteria). Safeguarding AI training data and model artifacts.</p>
+</div>
+
+<div class="last-updated">Last updated: 7 Oct 2026</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- VENDOR UPDATES                              -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot vendor"></div>
+    <h3>Vendor Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">4 Oct 2026</div>
+    <h4>Red Hat — RHEL 9.5 FIPS 140-3 Certification for Storage Encryption</h4>
+    <p>RHEL 9.5 achieves FIPS 140-3 certification for LUKS2 disk encryption and dm-crypt. Critical for regulated-industry partners (finance, healthcare, government) deploying AI workloads requiring certified encryption at rest.</p>
+    <div class="tags">
+      <span class="tag redhat">Red Hat</span>
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">28 Sep 2026</div>
+    <h4>Veeam — Kubernetes-Native Backup for OpenShift + ODF</h4>
+    <p>Veeam Kasten K10 adds deep integration with ODF snapshots for application-consistent backups of OpenShift AI workloads. Competitive note: positions well against Commvault's Kubernetes offering for partner conversations.</p>
+    <div class="tags">
+      <span class="tag">Veeam</span>
+      <span class="tag sales">Sales</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- OPEN SOURCE UPDATES                         -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot opensource"></div>
+    <h3>Open Source Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">2 Oct 2026</div>
+    <h4>dm-integrity + dm-crypt — Authenticated Encryption for Block Devices</h4>
+    <p>Upstream improvements to dm-integrity allow authenticated encryption (AEAD) with negligible performance overhead. Ensures both confidentiality and tamper detection for AI model storage volumes. Available in RHEL 9.5 kernel.</p>
+    <div class="tags">
+      <span class="tag">Linux Kernel</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">18 Sep 2026</div>
+    <h4>Ceph RGW — S3 Object Lock for Immutable AI Training Data</h4>
+    <p>Ceph RADOS Gateway now supports full S3 Object Lock (WORM compliance). Enables regulatory-compliant immutable storage for AI training datasets — data cannot be modified or deleted during retention period.</p>
+    <div class="tags">
+      <span class="tag">Ceph</span>
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- INDUSTRY UPDATES                            -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-group">
+  <div class="section-header">
+    <div class="dot industry"></div>
+    <h3>Industry Updates</h3>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">1 Oct 2026</div>
+    <h4>EU AI Act — Data Provenance Requirements Impact Storage Architecture</h4>
+    <p>EU AI Act's data provenance requirements (effective 2027) mandate auditable lineage for training data. Storage systems must support immutability, versioning, and tamper-evident logging. Red Hat's Ceph + RHEL security stack is well-positioned for compliance.</p>
+    <div class="tags">
+      <span class="tag">Regulation</span>
+      <span class="tag sales">Sales</span>
+    </div>
+  </div>
+
+  <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->
+</div>
