@@ -457,34 +457,63 @@
   footer a { color: var(--text-secondary); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
-  /* Search bar */
-  .search-bar {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 1.2rem 1.5rem 0;
-  }
-
-  .search-wrapper {
-    position: relative;
+  /* Search — icon trigger + slide-down panel */
+  .search-trigger {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 10;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    backdrop-filter: blur(4px);
   }
 
-  .search-icon {
-    position: absolute;
-    left: 14px;
-    color: var(--text-muted);
-    font-size: 1rem;
-    pointer-events: none;
+  .search-trigger:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.08);
+  }
+
+  .search-panel {
+    display: none;
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 1rem 2rem;
+    animation: slideDown 0.25s ease;
+  }
+
+  .search-panel.open { display: block; }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .search-panel-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
   }
 
   .search-input {
-    width: 100%;
-    padding: 0.7rem 2.8rem 0.7rem 2.5rem;
+    flex: 1;
+    padding: 0.6rem 1rem;
     border: 1.5px solid var(--border);
     border-radius: 8px;
     font-size: 0.9rem;
-    background: var(--surface);
+    background: var(--surface-alt);
     color: var(--text-primary);
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -497,27 +526,26 @@
 
   .search-input::placeholder { color: var(--text-muted); }
 
-  .search-clear {
-    position: absolute;
-    right: 10px;
+  .search-close {
     background: none;
     border: none;
     color: var(--text-muted);
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     cursor: pointer;
     padding: 4px 8px;
-    border-radius: 4px;
-    display: none;
+    border-radius: 6px;
+    transition: background 0.15s;
   }
 
-  .search-clear:hover { background: var(--surface-alt); color: var(--text-primary); }
+  .search-close:hover { background: var(--surface-alt); color: var(--text-primary); }
 
   .search-stats {
     font-size: 0.75rem;
     color: var(--text-muted);
-    padding: 0.4rem 0 0;
-    text-align: right;
-    min-height: 1.2rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0.4rem auto 0;
+    min-height: 1rem;
   }
 
   .entry-card.search-hidden { display: none; }
@@ -560,6 +588,7 @@
       Organized by storage industry taxonomy &middot; Updated weekly
     </div>
   </div>
+  <button class="search-trigger" id="searchTrigger" title="Search (Ctrl+K)">&#x1F50D;</button>
 </div>
 
 <nav class="tab-bar" role="tablist">
@@ -583,11 +612,10 @@
   </button>
 </nav>
 
-<div class="search-bar">
-  <div class="search-wrapper">
-    <span class="search-icon">&#x1F50D;</span>
-    <input type="text" class="search-input" id="searchInput" placeholder="Search across all tabs... (e.g. Ceph, NVMe, Gartner, encryption)">
-    <button class="search-clear" id="searchClear">&times;</button>
+<div class="search-panel" id="searchPanel">
+  <div class="search-panel-inner">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search across all tabs... (e.g. Ceph, NVMe, Gartner)">
+    <button class="search-close" id="searchClose" title="Close search">&times;</button>
   </div>
   <div class="search-stats" id="searchStats"></div>
 </div>
@@ -660,10 +688,33 @@ tabButtons.forEach(btn => {
 });
 
 // Search
+const searchTrigger = document.getElementById('searchTrigger');
+const searchPanel = document.getElementById('searchPanel');
 const searchInput = document.getElementById('searchInput');
-const searchClear = document.getElementById('searchClear');
+const searchClose = document.getElementById('searchClose');
 const searchStats = document.getElementById('searchStats');
 let searchMode = false;
+
+function openSearchPanel() {
+  searchPanel.classList.add('open');
+  searchInput.focus();
+}
+
+function closeSearchPanel() {
+  searchInput.value = '';
+  searchPanel.classList.remove('open');
+  exitSearch();
+}
+
+searchTrigger.addEventListener('click', openSearchPanel);
+searchClose.addEventListener('click', closeSearchPanel);
+
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    searchPanel.classList.contains('open') ? closeSearchPanel() : openSearchPanel();
+  }
+});
 
 async function loadAllTabs() {
   for (const t of TABS) {
@@ -699,7 +750,6 @@ function doSearch(query) {
     return;
   }
   searchMode = true;
-  searchClear.style.display = 'block';
 
   // Show all tabs content simultaneously
   tabContents.forEach(tc => tc.style.display = 'block');
@@ -754,7 +804,6 @@ function doSearch(query) {
 
 function exitSearch() {
   searchMode = false;
-  searchClear.style.display = 'none';
   searchStats.textContent = '';
   clearHighlights();
   document.querySelectorAll('.search-hidden').forEach(el => el.classList.remove('search-hidden'));
@@ -787,18 +836,8 @@ searchInput.addEventListener('input', () => {
   }, 250);
 });
 
-searchClear.addEventListener('click', () => {
-  searchInput.value = '';
-  exitSearch();
-  searchInput.focus();
-});
-
 searchInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    searchInput.value = '';
-    exitSearch();
-    searchInput.blur();
-  }
+  if (e.key === 'Escape') closeSearchPanel();
 });
 
 // Load initial tab (from hash or default)
