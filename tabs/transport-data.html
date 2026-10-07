@@ -1,9 +1,49 @@
-<!-- TRANSPORT DATA — NVMe-oF, RDMA, network storage, data movement, CXL -->
+<!-- TRANSPORT DATA — NVMe-oF, RDMA, CXL, network storage fabrics -->
 <!-- Last updated: 2026-10-07 -->
 
 <div class="tab-intro transport">
   <h2>Transport Data</h2>
-  <p>Data transport technologies — NVMe-oF, NVMe/TCP, RDMA (RoCE, InfiniBand), CXL, and network storage fabrics. How transport layer choices determine AI training throughput and data pipeline latency.</p>
+  <p>Data transport technologies — NVMe-oF, NVMe/TCP, RDMA, CXL, and network storage fabrics. How transport layer choices determine AI training throughput and data pipeline latency.</p>
+</div>
+
+<!-- ── VISUAL: Technology Landscape ── -->
+<div class="tech-landscape">
+  <h3>Technology Landscape</h3>
+  <div class="flow-row">
+    <div class="flow-layer">
+      <div class="flow-layer-label">Interconnect</div>
+      <div class="flow-items">
+        <div class="flow-block secondary">PCIe 5.0/6.0</div>
+        <div class="flow-block secondary">CXL 3.1/4.0</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Network Fabric</div>
+      <div class="flow-items">
+        <div class="flow-block accent">InfiniBand</div>
+        <div class="flow-block accent">RoCEv2</div>
+        <div class="flow-block accent">400/800G Eth</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Storage Transport</div>
+      <div class="flow-items">
+        <div class="flow-block primary">NVMe-oF</div>
+        <div class="flow-block primary">NVMe/TCP</div>
+        <div class="flow-block primary">iSCSI</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">GPU Direct</div>
+      <div class="flow-items">
+        <div class="flow-block primary">GPUDirect Storage</div>
+        <div class="flow-block primary">SPDK</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="last-updated">Last updated: 7 Oct 2026</div>
@@ -18,24 +58,24 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">4 Oct 2026</div>
-    <h4>Broadcom — 400G Ethernet Adapters with Native NVMe-oF Offload</h4>
-    <p>New 400GbE NICs with hardware NVMe-oF offload engines. Enables disaggregated storage fabric designs with wire-speed NVMe-oF initiator/target support.</p>
+    <div class="entry-date">Sep 2026</div>
+    <h4>NVIDIA GPUDirect Storage v1.19 — Native NVMe P2PDMA & Scatter-Gather</h4>
+    <p>GDS v1.19 adds NVMe P2PDMA support using upstream Linux NVMe drivers (eliminating custom patches), new scatter-gather cuFile APIs for multi-buffer I/O, and Amazon FSx for Lustre integration. GDS is now part of CUDA.</p>
     <div class="tags">
-      <span class="tag">Broadcom</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://docs.nvidia.com/gpudirect-storage/release-notes/index.html" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">29 Sep 2026</div>
-    <h4>NVIDIA GPUDirect Storage 2.0 — Bypass CPU for AI I/O</h4>
-    <p>GPUDirect Storage 2.0 enables direct DMA between NVMe storage and GPU memory, bypassing CPU entirely. Linux kernel 6.10+ includes required DMA-BUF support. Critical for GPU-accelerated AI infrastructure.</p>
+    <div class="entry-date">14 Oct 2025</div>
+    <h4>Broadcom Thor Ultra — Industry's First 800G AI Ethernet NIC</h4>
+    <p>Broadcom launches Thor Ultra, an 800G Ethernet NIC designed for AI scale-out. Consumes ~50W (vs. 125-150W for competing DPUs) and supports RoCEv2 with hardware congestion control. Shipping immediately to cloud providers including Google.</p>
     <div class="tags">
-      <span class="tag">NVIDIA</span>
       <span class="tag sales">Sales</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://investors.broadcom.com/news-releases/news-release-details/broadcom-introduces-industrys-first-800g-ai-ethernet-nic" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
@@ -51,14 +91,23 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">1 Oct 2026</div>
-    <h4>Linux 6.12 — NVMe/TCP Multipath Improvements</h4>
-    <p>Kernel 6.12 brings native NVMe/TCP multipath with automatic path failover and round-robin load balancing. Eliminates the need for dm-multipath in NVMe-oF deployments.</p>
+    <div class="entry-date">2025</div>
+    <h4>SPDK Transitions to Linux Foundation</h4>
+    <p>Intel transferred the Storage Performance Development Kit (SPDK) to the Linux Foundation for long-term sustainability. SPDK 26.5 is the latest release. CSI driver brings SPDK to Kubernetes via NVMe-oF.</p>
     <div class="tags">
-      <span class="tag">Linux Kernel</span>
-      <span class="tag">NVMe</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://spdk.io/" target="_blank" rel="noopener">Source &rarr;</a>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">Mid-2025</div>
+    <h4>Linux Kernel NVMe-TCP Receive Offload Patches Reach v29</h4>
+    <p>The long-running NVMe-TCP receive offload patchset reaches v29 on net-next, adding NIC driver hooks for queue init/teardown, IO operation setup with async completions, and CRC offload on receive. Tested on Mellanox ConnectX-7.</p>
+    <div class="tags">
+      <span class="tag engineering">Engineering</span>
+    </div>
+    <a class="read-more" href="https://lwn.net/Articles/1027686/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
@@ -74,14 +123,24 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">26 Sep 2026</div>
-    <h4>CXL 3.1 Specification Ratified — Memory Pooling for AI</h4>
-    <p>CXL Consortium ratifies 3.1 spec with fabric-level memory pooling and hardware-enforced isolation. Enables shared memory pools across compute nodes for AI training. Early Linux CXL support already upstream via cxl-cli and kernel CXL subsystem.</p>
+    <div class="entry-date">18 Nov 2025</div>
+    <h4>CXL 4.0 Specification Released — Doubles Bandwidth to 128 GT/s</h4>
+    <p>CXL 4.0 doubles link rate from 64 to 128 GT/s, adds bundled ports enabling up to 1.5 TB/s connections, and enhances memory RAS features. Announced at Supercomputing 2025. Multi-rack memory pooling targeted for late 2026-2027.</p>
     <div class="tags">
-      <span class="tag">CXL</span>
       <span class="tag sales">Sales</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.hpcwire.com/off-the-wire/cxl-consortium-releases-the-compute-express-link-4-0-specification-increasing-speed-and-bandwidth/" target="_blank" rel="noopener">Source &rarr;</a>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">Q1 2026</div>
+    <h4>Enterprise Storage Market Surges 22.7% to $9.2B — Flash Crosses 50%</h4>
+    <p>IDC reports Q1 2026 enterprise storage market reached $9.2B (22.7% YoY growth). All-flash systems crossed 50% market share for the first time at $4.9B. NVMe drives account for 78% of enterprise storage upgrades.</p>
+    <div class="tags">
+      <span class="tag sales">Sales</span>
+    </div>
+    <a class="read-more" href="https://infotechlead.com/networking/storage-market-jumps-22-7-to-9-2-bn-in-q1-2026-as-ai-demand-and-flash-storage-adoption-surge-96585" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->

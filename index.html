@@ -340,6 +340,103 @@
   .tab-intro.protect { background: var(--protect-light); border-color: var(--protect); }
   .tab-intro.optimize { background: var(--optimize-light); border-color: var(--optimize); }
 
+  /* Visual block/flow diagram */
+  .tech-landscape {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+  }
+
+  .tech-landscape h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+  }
+
+  .flow-row:last-child { margin-bottom: 0; }
+
+  .flow-layer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .flow-layer-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .flow-items {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .flow-block {
+    padding: 0.45rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: 1.5px solid;
+    text-align: center;
+    min-width: 70px;
+    transition: transform 0.15s;
+  }
+
+  .flow-block:hover { transform: translateY(-1px); }
+
+  .flow-block.primary {
+    background: var(--store);
+    color: #fff;
+    border-color: var(--store);
+  }
+
+  .flow-block.secondary {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-secondary);
+  }
+
+  .flow-block.accent {
+    background: var(--accelerate-light);
+    border-color: var(--accelerate);
+    color: var(--text-primary);
+  }
+
+  .flow-arrow {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .flow-arrow.down {
+    display: block;
+    text-align: center;
+    margin: 0.3rem 0;
+  }
+
   /* Last updated */
   .last-updated {
     font-size: 0.75rem;
@@ -359,6 +456,90 @@
 
   footer a { color: var(--text-secondary); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
+
+  /* Search bar */
+  .search-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.2rem 1.5rem 0;
+  }
+
+  .search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.7rem 2.8rem 0.7rem 2.5rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: var(--surface);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .search-input:focus {
+    border-color: var(--store);
+    box-shadow: 0 0 0 3px rgba(107, 91, 149, 0.15);
+  }
+
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .search-clear {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .search-clear:hover { background: var(--surface-alt); color: var(--text-primary); }
+
+  .search-stats {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding: 0.4rem 0 0;
+    text-align: right;
+    min-height: 1.2rem;
+  }
+
+  .entry-card.search-hidden { display: none; }
+  .section-group.search-hidden { display: none; }
+  .tab-intro.search-hidden { display: none; }
+  .tech-landscape.search-hidden { display: none; }
+  .last-updated.search-hidden { display: none; }
+
+  .entry-card.search-match {
+    border-left: 3px solid var(--store);
+  }
+
+  mark {
+    background: #fef08a;
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    mark { background: #854d0e; color: #fef9c3; }
+  }
 
   /* Responsive */
   @media (max-width: 768px) {
@@ -401,6 +582,15 @@
     <span class="tab-icon">&#x2699;</span> Optimize Infra
   </button>
 </nav>
+
+<div class="search-bar">
+  <div class="search-wrapper">
+    <span class="search-icon">&#x1F50D;</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search across all tabs... (e.g. Ceph, NVMe, Gartner, encryption)">
+    <button class="search-clear" id="searchClear">&times;</button>
+  </div>
+  <div class="search-stats" id="searchStats"></div>
+</div>
 
 <main class="content-area">
   <div id="store-data" class="tab-content active">
@@ -467,6 +657,148 @@ async function loadTab(tabId) {
 
 tabButtons.forEach(btn => {
   btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+// Search
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+const searchStats = document.getElementById('searchStats');
+let searchMode = false;
+
+async function loadAllTabs() {
+  for (const t of TABS) {
+    if (!loaded[t]) await loadTab(t);
+  }
+}
+
+function clearHighlights() {
+  document.querySelectorAll('mark').forEach(m => {
+    m.replaceWith(m.textContent);
+  });
+}
+
+function highlightText(el, query) {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  nodes.forEach(node => {
+    if (node.parentElement.tagName === 'MARK') return;
+    if (re.test(node.textContent)) {
+      const span = document.createElement('span');
+      span.innerHTML = node.textContent.replace(re, '<mark>$1</mark>');
+      node.parentElement.replaceChild(span, node);
+    }
+  });
+}
+
+function doSearch(query) {
+  clearHighlights();
+  if (!query || query.length < 2) {
+    exitSearch();
+    return;
+  }
+  searchMode = true;
+  searchClear.style.display = 'block';
+
+  // Show all tabs content simultaneously
+  tabContents.forEach(tc => tc.style.display = 'block');
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+
+  const q = query.toLowerCase();
+  let matchCount = 0;
+  let tabMatches = {};
+
+  TABS.forEach(tabId => {
+    const container = document.getElementById(tabId);
+    const cards = container.querySelectorAll('.entry-card');
+    let tabHits = 0;
+
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) {
+        card.classList.remove('search-hidden');
+        card.classList.add('search-match');
+        highlightText(card, query);
+        matchCount++;
+        tabHits++;
+      } else {
+        card.classList.add('search-hidden');
+        card.classList.remove('search-match');
+      }
+    });
+
+    // Hide sections with no visible cards
+    container.querySelectorAll('.section-group').forEach(sg => {
+      const visible = sg.querySelectorAll('.entry-card:not(.search-hidden)').length;
+      sg.classList.toggle('search-hidden', visible === 0);
+    });
+
+    // Hide tab intro, landscape, last-updated during search
+    container.querySelectorAll('.tab-intro, .tech-landscape, .last-updated').forEach(el => {
+      el.classList.add('search-hidden');
+    });
+
+    // Hide entire tab if no matches
+    container.style.display = tabHits > 0 ? 'block' : 'none';
+    if (tabHits > 0) tabMatches[tabId] = tabHits;
+  });
+
+  const tabNames = Object.keys(tabMatches).map(t =>
+    t.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+  );
+  searchStats.textContent = matchCount > 0
+    ? matchCount + ' result' + (matchCount !== 1 ? 's' : '') + ' across ' + tabNames.join(', ')
+    : 'No results found for "' + query + '"';
+}
+
+function exitSearch() {
+  searchMode = false;
+  searchClear.style.display = 'none';
+  searchStats.textContent = '';
+  clearHighlights();
+  document.querySelectorAll('.search-hidden').forEach(el => el.classList.remove('search-hidden'));
+  document.querySelectorAll('.search-match').forEach(el => el.classList.remove('search-match'));
+
+  // Restore normal tab behavior
+  const activeTab = TABS.find(t => {
+    const btn = document.querySelector('[data-tab="' + t + '"]');
+    return btn && btn.getAttribute('aria-selected') === 'true';
+  }) || 'store-data';
+
+  tabContents.forEach(tc => {
+    tc.style.display = '';
+    tc.classList.remove('active');
+  });
+  switchTab(activeTab);
+}
+
+let searchTimeout;
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(async () => {
+    const q = searchInput.value.trim();
+    if (q.length >= 2) {
+      await loadAllTabs();
+      doSearch(q);
+    } else {
+      exitSearch();
+    }
+  }, 250);
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  exitSearch();
+  searchInput.focus();
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    searchInput.value = '';
+    exitSearch();
+    searchInput.blur();
+  }
 });
 
 // Load initial tab (from hash or default)

@@ -1,9 +1,51 @@
-<!-- FORMAT DATA — Data formats, metadata, schemas, NFS/SMB protocols, data layout -->
+<!-- FORMAT DATA — Data formats, metadata, protocols, data layout -->
 <!-- Last updated: 2026-10-07 -->
 
 <div class="tab-intro format">
   <h2>Format Data</h2>
-  <p>Data formats, metadata management, file layout strategies, and protocols (NFS, SMB, S3 API). How data formatting decisions affect AI/ML data pipeline throughput and model training efficiency.</p>
+  <p>Data formats, metadata management, file layout strategies, and protocols (NFS, SMB, S3 API). How data formatting decisions affect AI/ML data pipeline throughput.</p>
+</div>
+
+<!-- ── VISUAL: Technology Landscape ── -->
+<div class="tech-landscape">
+  <h3>Technology Landscape</h3>
+  <div class="flow-row">
+    <div class="flow-layer">
+      <div class="flow-layer-label">Protocols</div>
+      <div class="flow-items">
+        <div class="flow-block primary">NFSv4.2</div>
+        <div class="flow-block primary">SMB3</div>
+        <div class="flow-block primary">S3 API</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Columnar / Tabular</div>
+      <div class="flow-items">
+        <div class="flow-block accent">Parquet</div>
+        <div class="flow-block accent">Arrow</div>
+        <div class="flow-block accent">ORC</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">ML Formats</div>
+      <div class="flow-items">
+        <div class="flow-block secondary">TFRecord</div>
+        <div class="flow-block secondary">Safetensors</div>
+        <div class="flow-block secondary">ONNX</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Lakehouse</div>
+      <div class="flow-items">
+        <div class="flow-block secondary">Delta Lake</div>
+        <div class="flow-block secondary">Iceberg</div>
+        <div class="flow-block secondary">Hudi</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="last-updated">Last updated: 7 Oct 2026</div>
@@ -18,13 +60,13 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">6 Oct 2026</div>
-    <h4>NFS-Ganesha Performance Tuning for AI Data Lakes</h4>
-    <p>New tuning guide published for NFS-Ganesha on CephFS, targeting sequential read patterns common in AI training. Achieves near-native CephFS throughput over NFSv4.2 with readdir_plus and delegation support.</p>
+    <div class="entry-date">21 Apr 2026</div>
+    <h4>Apache Arrow 24.0.0 — Up to 50% Faster Parquet Reads</h4>
+    <p>Arrow 24.0.0 ships with a rewrite of bit-unpacking utilities yielding up to 50% faster Parquet column reads. Also adds a project-wide Security Model, encrypted bloom filter support, and migrates to C++20 std::span.</p>
     <div class="tags">
-      <span class="tag">NFS</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://arrow.apache.org/blog/2026/04/21/24.0.0-release/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
@@ -40,24 +82,23 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">2 Oct 2026</div>
-    <h4>Apache Parquet 3.0 — Columnar Format Gains Nested Type Compression</h4>
-    <p>Parquet 3.0 brings 30% better compression for nested/repeated fields common in ML feature stores. Relevant for data lakehouse architectures running on open-source infrastructure.</p>
+    <div class="entry-date">13 Jun 2026</div>
+    <h4>Parquet Format 2.13.0 — Native Variant & Geospatial Types</h4>
+    <p>Parquet format 2.13.0 adds native Variant type for semi-structured data (replacing inefficient JSON storage) and first-class geospatial types. Footer redesign and vector embedding types are under active proposal.</p>
     <div class="tags">
-      <span class="tag">Apache</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://parquet.apache.org/blog/parquet-format/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">20 Sep 2026</div>
-    <h4>NFSv4.2 Server-Side Copy — Performance Benchmarks</h4>
-    <p>Community benchmarks show NFSv4.2 server-side copy (COPY_RANGE) reducing data staging time by 60% for large dataset shuffles. Eliminates network round-trip for intra-server data movement during AI preprocessing.</p>
+    <div class="entry-date">Aug 2025</div>
+    <h4>Linux 6.17 — NFSv4.2 Async COPY Re-enabled & Write Delegations</h4>
+    <p>Linux 6.17 re-enables NFSv4.2 asynchronous COPY operations, adds write delegations for O_WRONLY, lifts the COMPOUND operation cap, adds birth time support, and speeds up delegation lookup with hash tables.</p>
     <div class="tags">
-      <span class="tag">NFS</span>
-      <span class="tag">Linux</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.phoronix.com/news/NFS-Linux-6.17" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
@@ -73,13 +114,13 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">30 Sep 2026</div>
-    <h4>Unstructured Data Growth Outpaces Structured 4:1</h4>
-    <p>Industry data landscape reports show unstructured data (files, objects, images) growing 4x faster than structured. Reinforces the need for scalable file/object storage in AI-driven enterprises.</p>
+    <div class="entry-date">2025</div>
+    <h4>IDC StorageSphere: Unstructured Data Remains the Backbone</h4>
+    <p>IDC's StorageSphere forecast (2025-2029) notes that while structured data grows faster for AI/analytics, unstructured data remains the backbone of long-term digital storage. 74% of enterprises now store more than 5PB of unstructured data — a 57% increase over 2024.</p>
     <div class="tags">
-      <span class="tag">Industry</span>
       <span class="tag sales">Sales</span>
     </div>
+    <a class="read-more" href="https://www.komprise.com/companies-are-collecting-more-unstructured-data-and-spending-more-to-manage-it-amid-mounting-ai-challenges/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->

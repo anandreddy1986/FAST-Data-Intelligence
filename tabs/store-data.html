@@ -1,9 +1,51 @@
-<!-- STORE DATA — Filesystems, block/object storage, Ceph, GlusterFS, LVM, XFS, ext4 -->
+<!-- STORE DATA — Filesystems, block/object storage, Ceph, volume management -->
 <!-- Last updated: 2026-10-07 -->
 
 <div class="tab-intro store">
   <h2>Store Data</h2>
-  <p>Persistent storage technologies — filesystems (XFS, ext4, Btrfs), block & object storage (Ceph, ODF), volume management (LVM, Stratis), and how storage choices impact AI/ML workloads.</p>
+  <p>Persistent storage technologies — filesystems, block & object storage, volume management, and software-defined storage for AI/ML workloads.</p>
+</div>
+
+<!-- ── VISUAL: Technology Landscape ── -->
+<div class="tech-landscape">
+  <h3>Technology Landscape</h3>
+  <div class="flow-row">
+    <div class="flow-layer">
+      <div class="flow-layer-label">Hardware</div>
+      <div class="flow-items">
+        <div class="flow-block secondary">HDD</div>
+        <div class="flow-block secondary">NVMe SSD</div>
+        <div class="flow-block secondary">QLC Flash</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Volume / Pool</div>
+      <div class="flow-items">
+        <div class="flow-block accent">LVM</div>
+        <div class="flow-block accent">Stratis</div>
+        <div class="flow-block accent">LUKS</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Filesystem</div>
+      <div class="flow-items">
+        <div class="flow-block primary">XFS</div>
+        <div class="flow-block primary">ext4</div>
+        <div class="flow-block primary">Btrfs</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Distributed</div>
+      <div class="flow-items">
+        <div class="flow-block primary">Ceph</div>
+        <div class="flow-block primary">ODF</div>
+        <div class="flow-block primary">MinIO</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="last-updated">Last updated: 7 Oct 2026</div>
@@ -18,24 +60,35 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">7 Oct 2026</div>
-    <h4>ODF 4.16 — Unified Storage for AI Pipelines</h4>
-    <p>OpenShift Data Foundation 4.16 introduces multi-cloud gateway enhancements and NVMe-oF support for Ceph, reducing storage latency for GPU-attached AI training clusters by up to 40%.</p>
+    <div class="entry-date">Sep 2026</div>
+    <h4>NetApp Unveils Novus Architecture — 100 TB/s, Zettabyte-Scale</h4>
+    <p>At INSIGHT 2026, NetApp announced Novus, a new architecture claiming 100 TB/s throughput and zettabyte-scale file systems. Also announced a strategic alliance with Nutanix to integrate Intelligent Data Infrastructure. Positions data (not compute) as the main constraint on scaling AI.</p>
     <div class="tags">
-      <span class="tag">ODF</span>
       <span class="tag sales">Sales</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.investing.com/news/transcripts/netapp-at-insight-2026-bets-on-aiera-data-infrastructure-93CH-4923688" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">1 Oct 2026</div>
-    <h4>NetApp ONTAP AI — Persistent Volume Claims at Scale</h4>
-    <p>NetApp's latest Trident CSI driver update improves PVC provisioning speed for Kubernetes AI workloads. Notable benchmark for CSI-based storage provisioning in large-scale ML environments.</p>
+    <div class="entry-date">Apr 2026</div>
+    <h4>VAST Data Raises $1B at $30B Valuation</h4>
+    <p>VAST Data raised $1 billion Series F co-led by Drive Capital and Access Industries with NVIDIA participation. Now serves as primary storage for CoreWeave's global GPU cloud with $4B cumulative bookings. Crossed $100M revenue in 2025.</p>
     <div class="tags">
-      <span class="tag">NetApp</span>
       <span class="tag sales">Sales</span>
     </div>
+    <a class="read-more" href="https://www.hpcwire.com/2025/10/16/future-of-storage-hpc-and-ai-storage-by-the-numbers/" target="_blank" rel="noopener">Source &rarr;</a>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">Mar 2026</div>
+    <h4>Dell Exascale Storage & Lightning File System at GTC 2026</h4>
+    <p>Dell announced the Lightning File System (GA globally) and previewed Dell Exascale Storage — a software-first 4-in-1 unified architecture supporting file, object, and block. Up to 6 TB/s read per rack with NVIDIA CX-8/CX-9 SuperNIC support.</p>
+    <div class="tags">
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+    <a class="read-more" href="https://www.storagenewsletter.com/2026/03/27/scale-your-ai-ambitions-with-dell-storage-and-nvidia/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
@@ -51,24 +104,34 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">5 Oct 2026</div>
-    <h4>Ceph Squid (v19) — BlueStore Deferred Writes Overhaul</h4>
-    <p>The Squid release refactors BlueStore's deferred write path, delivering 25% improved random write IOPS. XFS remains the recommended underlying filesystem for OSD deployments.</p>
+    <div class="entry-date">18 Nov 2025</div>
+    <h4>Ceph Tentacle (v20.2.0) Released</h4>
+    <p>Major release: FastEC delivers 2-3x erasure coding performance improvement with partial reads/writes. Default EC plugin changed from Jerasure to ISA-L. Crimson OSD + SeaStore now deployable for testing. Smarter RADOS tiering for hybrid NVMe/SSD/HDD clusters.</p>
     <div class="tags">
-      <span class="tag">Ceph</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://ceph.io/en/news/blog/2025/v20-2-0-tentacle-released/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">28 Sep 2026</div>
-    <h4>XFS Online Repair — Merged in Linux 6.12</h4>
-    <p>The long-awaited online repair feature for XFS has been merged upstream. Allows live filesystem repair without unmounting — critical for 24/7 AI training infrastructure where downtime for fsck is unacceptable.</p>
+    <div class="entry-date">2025</div>
+    <h4>XFS Atomic Writes Merged for Linux 6.16</h4>
+    <p>Atomic write support merged for XFS using a software-based CoW fallback method. Also: pNFS, scrub, and parent pointers features had experimental warnings removed. V4 filesystem support now disabled by default. Initial MySQL benchmarks show strong performance.</p>
     <div class="tags">
-      <span class="tag">XFS</span>
-      <span class="tag">Linux Kernel</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.phoronix.com/news/XFS-Atomic-Writes-Linux-6.16" target="_blank" rel="noopener">Source &rarr;</a>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">Feb 2026</div>
+    <h4>MinIO Marks GitHub Repo Unmaintained, Pivots to Commercial AIStor</h4>
+    <p>MinIO marked its flagship open-source GitHub repository as unmaintained, directing users to commercial AIStor. This followed the 2021 license switch from Apache 2.0 to AGPL v3 and removal of key features from the community version. Community forks have emerged.</p>
+    <div class="tags">
+      <span class="tag engineering">Engineering</span>
+      <span class="tag sales">Sales</span>
+    </div>
+    <a class="read-more" href="https://calmops.com/database/minio/minio-trends/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
@@ -84,24 +147,13 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">3 Oct 2026</div>
-    <h4>IDC: AI Storage Market to Reach $30B by 2028</h4>
-    <p>IDC's latest forecast projects the AI-optimized storage market at $30B by 2028, with software-defined storage (SDS) growing fastest. The SDS segment is outpacing traditional appliance-based storage 3:1.</p>
+    <div class="entry-date">2025</div>
+    <h4>AI-Powered Storage Market Hits ~$36B, Growing at 25% CAGR</h4>
+    <p>Multiple analyst firms (Fortune Business Insights, MarketsandMarkets) value the AI-powered storage market at $35-40B in 2025, projected to reach $45-50B in 2026. Within HPC-AI, storage accounts for ~17% of total spending.</p>
     <div class="tags">
-      <span class="tag">IDC</span>
       <span class="tag sales">Sales</span>
     </div>
-  </div>
-
-  <div class="entry-card">
-    <div class="entry-date">25 Sep 2026</div>
-    <h4>AI Data Pipeline Reference Architecture Published</h4>
-    <p>New industry reference architecture maps storage tiers to AI pipeline stages (ingest, preprocess, train, serve). Useful framework for solution architects designing storage for AI workloads.</p>
-    <div class="tags">
-      <span class="tag">Industry</span>
-      <span class="tag sales">Sales</span>
-      <span class="tag engineering">Engineering</span>
-    </div>
+    <a class="read-more" href="https://www.fortunebusinessinsights.com/ai-powered-storage-market-108741" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->

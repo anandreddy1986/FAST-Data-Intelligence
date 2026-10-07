@@ -1,9 +1,50 @@
-<!-- PROTECT DATA — Backup, DR, snapshots, encryption, compliance, data integrity -->
+<!-- PROTECT DATA — Backup, DR, snapshots, encryption, compliance -->
 <!-- Last updated: 2026-10-07 -->
 
 <div class="tab-intro protect">
   <h2>Protect Data</h2>
-  <p>Data protection and security — encryption at rest/in transit, snapshots, backup & disaster recovery, filesystem integrity, compliance (FIPS, Common Criteria). Safeguarding AI training data and model artifacts.</p>
+  <p>Data protection and security — encryption at rest/in transit, snapshots, backup & disaster recovery, compliance (FIPS, WORM, EU AI Act). Safeguarding AI training data and model artifacts.</p>
+</div>
+
+<!-- ── VISUAL: Technology Landscape ── -->
+<div class="tech-landscape">
+  <h3>Technology Landscape</h3>
+  <div class="flow-row">
+    <div class="flow-layer">
+      <div class="flow-layer-label">Encryption</div>
+      <div class="flow-items">
+        <div class="flow-block primary">LUKS2</div>
+        <div class="flow-block primary">dm-crypt</div>
+        <div class="flow-block primary">dm-integrity</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Snapshots / WORM</div>
+      <div class="flow-items">
+        <div class="flow-block accent">LVM Snapshots</div>
+        <div class="flow-block accent">S3 Object Lock</div>
+        <div class="flow-block accent">Btrfs Snaps</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Backup / DR</div>
+      <div class="flow-items">
+        <div class="flow-block secondary">Kasten K10</div>
+        <div class="flow-block secondary">Velero</div>
+        <div class="flow-block secondary">Restic</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Compliance</div>
+      <div class="flow-items">
+        <div class="flow-block secondary">FIPS 140-3</div>
+        <div class="flow-block secondary">EU AI Act</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="last-updated">Last updated: 7 Oct 2026</div>
@@ -18,24 +59,25 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">4 Oct 2026</div>
-    <h4>RHEL 9.5 Achieves FIPS 140-3 Certification for Storage Encryption</h4>
-    <p>FIPS 140-3 certification achieved for LUKS2 disk encryption and dm-crypt. Critical for regulated-industry deployments (finance, healthcare, government) running AI workloads requiring certified encryption at rest.</p>
+    <div class="entry-date">11 May 2026</div>
+    <h4>Veeam Kasten v9.0 — Single-Policy Multi-Destination K8s Backup</h4>
+    <p>Kasten v9 collapses multi-destination Kubernetes backup into a single policy — immutable Vault copy, on-prem storage, and sovereign cloud simultaneously. Eliminates policy-drift failure modes. Supports FIPS 140-3 for DoD deployments.</p>
     <div class="tags">
-      <span class="tag">FIPS</span>
       <span class="tag sales">Sales</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://algeriatech.news/veeam-kasten-v9-kubernetes-multicloud-backup-sovereign-resilience-2026/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">28 Sep 2026</div>
-    <h4>Veeam — Kubernetes-Native Backup for OpenShift + ODF</h4>
-    <p>Veeam Kasten K10 adds deep integration with ODF snapshots for application-consistent backups of containerized AI workloads. Extends Kubernetes-native data protection to stateful ML pipelines.</p>
+    <div class="entry-date">Nov 2025</div>
+    <h4>Veeam Kasten v8.5 — VM-Centric Protection & Restore Validation</h4>
+    <p>Kasten v8.5 adds VM-centric protection on Kubernetes (auto-discovers dependencies), restore point validation with checksum verification, and Azure Entra ID federation. Addresses growing VM-on-Kubernetes and AI workload backup needs.</p>
     <div class="tags">
-      <span class="tag">Veeam</span>
       <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.veeam.com/blog/veeam-kasten-v85-kubernetes-enterprise-protection.html" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
@@ -51,24 +93,24 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">2 Oct 2026</div>
-    <h4>dm-integrity + dm-crypt — Authenticated Encryption for Block Devices</h4>
-    <p>Upstream improvements to dm-integrity allow authenticated encryption (AEAD) with negligible performance overhead. Ensures both confidentiality and tamper detection for AI model storage volumes.</p>
+    <div class="entry-date">Feb 2025</div>
+    <h4>Ceph RGW S3 Object Lock — WORM Compliance Deep Dive</h4>
+    <p>Ceph.io published a deep-dive on S3 Object Lock in RGW: Compliance mode (truly immutable, not even admin can delete) and Governance mode (admin override possible). Meets SEC Rule 17a-4(f) and FINRA Rule 4511(c) for financial record retention.</p>
     <div class="tags">
-      <span class="tag">Linux Kernel</span>
-      <span class="tag engineering">Engineering</span>
-    </div>
-  </div>
-
-  <div class="entry-card">
-    <div class="entry-date">18 Sep 2026</div>
-    <h4>Ceph RGW — S3 Object Lock for Immutable AI Training Data</h4>
-    <p>Ceph RADOS Gateway now supports full S3 Object Lock (WORM compliance). Enables regulatory-compliant immutable storage for AI training datasets — data cannot be modified or deleted during retention period.</p>
-    <div class="tags">
-      <span class="tag">Ceph</span>
       <span class="tag sales">Sales</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://ceph.io/en/news/blog/2025/rgw-deep-dive-3/" target="_blank" rel="noopener">Source &rarr;</a>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">Feb–Sep 2026</div>
+    <h4>dm-crypt/LUKS2 — Encrypted Crash Dump Support Expanded to ARM64/PPC</h4>
+    <p>CONFIG_CRASH_DM_CRYPT now supports LUKS-encrypted crash dump targets on ARM64 and PowerPC (previously x86 only). Addresses Argon2 key derivation being too memory-heavy for kdump. Cryptsetup 2.8.7 released July 2026.</p>
+    <div class="tags">
+      <span class="tag engineering">Engineering</span>
+    </div>
+    <a class="read-more" href="https://ratatoskr.run/linux-arm-kernel/2026/02/8250312/t" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
@@ -84,13 +126,13 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">1 Oct 2026</div>
-    <h4>EU AI Act — Data Provenance Requirements Impact Storage Architecture</h4>
-    <p>EU AI Act's data provenance requirements (effective 2027) mandate auditable lineage for training data. Storage systems must support immutability, versioning, and tamper-evident logging.</p>
+    <div class="entry-date">2 Aug 2026</div>
+    <h4>EU AI Act Enforcement Begins — Storage Compliance Deadline</h4>
+    <p>EU AI Act Article 10 mandates documented data governance for high-risk AI systems: data provenance, quality controls, bias analysis. Article 12 requires automatic event logging retained 6+ months. Penalties up to &euro;35M or 7% of global turnover. "Provenance can't be retrofitted — the storage substrate has to land before the training data does."</p>
     <div class="tags">
-      <span class="tag">Regulation</span>
       <span class="tag sales">Sales</span>
     </div>
+    <a class="read-more" href="https://akave.com/blog/eu-ai-act-storage-compliance-what-august-2026-means-for-your-agent-data" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->

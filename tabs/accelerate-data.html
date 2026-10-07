@@ -1,9 +1,50 @@
-<!-- ACCELERATE DATA — Caching, tiering, GPU-direct storage, performance optimization -->
+<!-- ACCELERATE DATA — Caching, tiering, GPU-direct storage, performance -->
 <!-- Last updated: 2026-10-07 -->
 
 <div class="tab-intro accelerate">
   <h2>Accelerate Data</h2>
-  <p>Performance acceleration — caching (dm-cache, bcache), storage tiering, I/O scheduling, read-ahead tuning, and GPU-direct storage. Techniques to eliminate storage bottlenecks in AI/ML training and inference pipelines.</p>
+  <p>Performance acceleration — caching, storage tiering, I/O scheduling, GPU-direct storage, and CXL memory. Eliminating storage bottlenecks in AI/ML training and inference pipelines.</p>
+</div>
+
+<!-- ── VISUAL: Technology Landscape ── -->
+<div class="tech-landscape">
+  <h3>Technology Landscape</h3>
+  <div class="flow-row">
+    <div class="flow-layer">
+      <div class="flow-layer-label">Memory Tier</div>
+      <div class="flow-items">
+        <div class="flow-block primary">DRAM</div>
+        <div class="flow-block primary">CXL Memory</div>
+        <div class="flow-block primary">HBM</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">Cache Layer</div>
+      <div class="flow-items">
+        <div class="flow-block accent">dm-cache</div>
+        <div class="flow-block accent">bcache</div>
+        <div class="flow-block accent">dm-writecache</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">I/O Engine</div>
+      <div class="flow-items">
+        <div class="flow-block secondary">io_uring</div>
+        <div class="flow-block secondary">SPDK</div>
+        <div class="flow-block secondary">libaio</div>
+      </div>
+    </div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-layer">
+      <div class="flow-layer-label">GPU Path</div>
+      <div class="flow-items">
+        <div class="flow-block primary">GPUDirect</div>
+        <div class="flow-block primary">SCADA</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="last-updated">Last updated: 7 Oct 2026</div>
@@ -18,23 +59,25 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">5 Oct 2026</div>
-    <h4>Intel Optane CXL — Persistent Memory as Storage Cache Tier</h4>
-    <p>Intel positions CXL-attached Optane as a transparent cache tier between DRAM and NVMe. Tools like dm-writecache and Stratis can leverage this as an intermediate tier. Potential game-changer for AI checkpoint I/O latency.</p>
+    <div class="entry-date">5 Aug 2026</div>
+    <h4>NVIDIA Open-Sources cuFile & Launches SCADA Framework</h4>
+    <p>NVIDIA open-sourced its cuFile storage stack at FMS 2026, creating the SCADA (Scaled Accelerated Data Access) framework. GPUs now build their own storage requests and handle completions, keeping hundreds of thousands of operations in flight. Google, Intel, and Meta are inaugural co-maintainers.</p>
     <div class="tags">
-      <span class="tag">Intel</span>
+      <span class="tag sales">Sales</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.forbes.com/sites/jonmarkman/2026/08/05/nvidia-open-sourced-cufile-a-new-era-for-gpu-driven-storage/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">30 Sep 2026</div>
-    <h4>Samsung CXL Memory Expander — 256GB CXL Modules for AI Servers</h4>
-    <p>Samsung ships 256GB CXL 2.0 memory expanders targeting AI server OEMs. Enterprise Linux distributions now support CXL memory hot-plug via kernel DAX subsystem.</p>
+    <div class="entry-date">17 Oct 2025</div>
+    <h4>Samsung CXL Memory Expander — CMM-D 2.0 Shipping, 3.1 Sampling</h4>
+    <p>Samsung unveiled its CMM-D CXL memory roadmap at OCP Global Summit 2025. CMM-D 2.0 (128/256GB, 36 GB/s, CXL 2.0/PCIe Gen5) is shipping. CMM-D 3.1 (up to 1TB, 72 GB/s, PCIe 6.0) samples distributed after June 2026, mass production targeted Q4 2026.</p>
     <div class="tags">
-      <span class="tag">Samsung</span>
       <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.trendforce.com/news/2025/10/17/news-samsung-unveils-cxl-roadmap-cmm-d-2-0-samples-ready-3-1-targeted-for-year-end/" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW VENDOR ENTRIES ABOVE THIS LINE -->
@@ -50,23 +93,23 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">3 Oct 2026</div>
-    <h4>io_uring — Zero-Copy Networking for Storage I/O</h4>
-    <p>Linux 6.12 extends io_uring with zero-copy send/receive for networked storage. Enables user-space NVMe-oF targets with kernel-bypass performance.</p>
+    <div class="entry-date">27 Apr 2026</div>
+    <h4>Stratis 3.9.0 — In-Place Encryption & Pool Reencryption</h4>
+    <p>Stratis 3.9.0 introduces in-place encryption, decryption, and reencryption of storage pools — no data migration required. Also adds cache bypass on pool start for recovering from failed cache devices. Written in Rust, layers dm, LUKS, and XFS.</p>
     <div class="tags">
-      <span class="tag">Linux Kernel</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.techblume.com/post/stratis-storage-3-9-released-major-encryption-upgrades-for-linux-storage" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">22 Sep 2026</div>
-    <h4>Stratis 3.7 — Automated Tiering Between NVMe and HDD Pools</h4>
-    <p>Stratis 3.7 introduces policy-driven data tiering between fast (NVMe) and capacity (HDD) pools. Hot data auto-promotes to NVMe tier. Reduces AI data lake costs while maintaining training throughput for active datasets.</p>
+    <div class="entry-date">Mar 2025</div>
+    <h4>io_uring Zero-Copy Network Receive — Linux 6.15</h4>
+    <p>Linux 6.15 added io_uring zero-copy receive, enabling DMA of packet data directly into userspace memory without kernel bounce. Benchmarks show 116.2 Gbps vs 82.2 Gbps for epoll (+41%). A 200G link saturated from a single CPU core.</p>
     <div class="tags">
-      <span class="tag">Stratis</span>
       <span class="tag engineering">Engineering</span>
     </div>
+    <a class="read-more" href="https://www.phoronix.com/news/Linux-6.15-IO_uring" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW OPEN SOURCE ENTRIES ABOVE THIS LINE -->
@@ -82,13 +125,24 @@
   </div>
 
   <div class="entry-card">
-    <div class="entry-date">27 Sep 2026</div>
-    <h4>Gartner: Storage I/O is the #1 AI Training Bottleneck</h4>
-    <p>Gartner's latest infrastructure report identifies storage I/O as the primary bottleneck in 68% of enterprise AI training deployments. Solving storage performance is selling AI enablement, not just disk.</p>
+    <div class="entry-date">2 Dec 2025</div>
+    <h4>Gartner: Storage Bottleneck Is #1 Constraint on AI Success</h4>
+    <p>Gartner's 2026 Strategic Roadmap finds that 50%+ of organizations report data/storage bottlenecks limiting AI performance. As AI shifts from episodic training to continuous distributed inference, legacy storage architectures are the primary constraint. GPU underutilization due to storage I/O is the leading cause of stalled AI projects.</p>
     <div class="tags">
-      <span class="tag">Gartner</span>
       <span class="tag sales">Sales</span>
     </div>
+    <a class="read-more" href="https://www.blocksandfiles.com/ai-ml/2025/12/02/gartners-storage-sermon-for-2026-2029/1720348" target="_blank" rel="noopener">Source &rarr;</a>
+  </div>
+
+  <div class="entry-card">
+    <div class="entry-date">Dec 2025</div>
+    <h4>Intel Optane Discontinued — CXL Is the Future</h4>
+    <p>Intel's Optane 200-series final shipments ended Dec 2025. No new Optane products will be developed. CXL Type-3 memory devices are the designated successors. Existing Optane customers should plan migration to CXL-based architectures.</p>
+    <div class="tags">
+      <span class="tag sales">Sales</span>
+      <span class="tag engineering">Engineering</span>
+    </div>
+    <a class="read-more" href="https://www.tomshardware.com/pc-components/ssds/intel-schedules-the-end-of-its-200-series-optane-memory-dimms-shipments-to-draw-to-an-end-in-late-2025" target="_blank" rel="noopener">Source &rarr;</a>
   </div>
 
   <!-- ADD NEW INDUSTRY ENTRIES ABOVE THIS LINE -->
